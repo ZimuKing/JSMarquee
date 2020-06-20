@@ -1,0 +1,89 @@
+<!DOCTYPE HTML>
+<html>
+<!-- 自主学习 来自慕客网 vivian老师的视频教学   连接 http://www.imooc.com/learn/17 -->
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.js"></script>
+
+<head>
+  <style type="text/css">
+    #marquee-show,
+    #marquee-hide {
+      /*不要margin否则滚动 会有缝隙*/
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between ;
+    }
+
+    li {
+      list-style: none;
+      margin: 1.2vh;
+    }
+    li span:first-child{
+      display: inline-block;
+      margin: auto 17vw;
+    }
+    #marquee {
+      /*overflow hidden·否则无法盖住下面的内容*/
+      overflow: hidden;
+      width: 50vw;
+      height: 20vh;
+      margin-left: 29%;
+      margin-top: 10%;
+      background: rgb(218, 218, 218);
+      color: rgb(0, 0, 0);
+    }
+  </style>
+  <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+  <title>what</title>
+</head>
+
+<body>
+  <div id="marquee">
+    <ul id="marquee-show">
+      <li>67889 <span>kuy1</span> <span>kjhkj</span></li>
+      <li>67889 <span>kuy2</span> <span>jlkj</span></li>
+      <li>67889 <span>kuy3</span> <span>kjjhkjhkjl</span></li>
+      <li>67889 <span>kuy4</span> <span>kjjhkjhkjl</span></li>
+      <li>67889 <span>kuy5</span> <span>kjjhkjhkjl</span></li>
+      <li>67889 <span>kuy6</span> <span>kjjhkjhkjl</span></li>
+      <li>67889 <span>kuy7</span> <span>kjjhkjhkjl</span></li>
+      <li>67889 <span>kuy8</span> <span>kjjhkjhkjl</span></li>
+      <li>67889 <span>kuy11</span> <span>kjjhkjhkjl</span></li>
+      <li>67889 <span>kuy21</span> <span>kjjhkjhkjl</span></li>
+      <li>67889 <span>kuy23</span> <span>kjjhkjhkjl</span></li>
+      <li>67889 <span>kuy34</span> <span>kjjhkjhkjl</span></li>
+    </ul>
+    <ul id="marquee-hide"></ul>
+  </div>
+</body>
+<script language="javascript" type="text/javascript">
+
+      var marqueeShow = document.getElementById("marquee-show");
+      var marqueeHide = document.getElementById("marquee-hide");
+      var marquee = document.getElementById("marquee");
+      /*将第一个ul的值赋值给第二个  当第一个头部消失时 由第二个来显示*/
+      marqueeHide.innerHTML = marqueeShow.innerHTML;
+      var marqueeTimer = null;
+      window.onload = function () {
+        doMarquee();
+      }
+      marqueeTimer = setInterval('doMarquee()', 50);
+      function doMarquee() {
+        //clearInterval(marqueeTimer);
+        /*如果滚动长度大于第一个ul的高度  就需要将第一个ul回到原处 */
+        if (marquee.scrollTop >= marqueeShow.offsetHeight) {
+          marquee.scrollTop = 0;
+        } else {
+          marquee.scrollTop++;
+        }/*鼠标移入就清除清除定时器*/
+        marquee.onmouseover = function () {
+          clearInterval(marqueeTimer);
+        }
+        marquee.onmouseout = function () {
+          marqueeTimer = setInterval('doMarquee()', 50);
+        }
+
+      }
+</script>
+
+</html>
